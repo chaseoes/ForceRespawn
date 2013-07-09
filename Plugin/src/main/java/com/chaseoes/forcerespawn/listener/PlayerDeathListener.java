@@ -8,7 +8,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerDeathListener implements Listener {
 
-    ForceRespawn plugin;
+    private final ForceRespawn plugin;
 
     public PlayerDeathListener(ForceRespawn plugin) {
         this.plugin = plugin;

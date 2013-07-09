@@ -20,28 +20,11 @@ public class ForceRespawn extends JavaPlugin {
     private static Thread thread;
 
     private NMS nms;
-    private Set<String> forceRespawnPlayers = new HashSet<String>();
 
     public static void sendRespawnPacket(Player player) {
         Validate.notNull(player, "player can not be null");
         threadCheck();
         ForceRespawn.instance.nms.sendRespawnPacket(player);
-    }
-
-    public static void setPlayerForceRespawn(Player player, boolean forceRespawn) {
-        Validate.notNull(player, "player can not be null");
-        threadCheck();
-        if (forceRespawn) {
-            ForceRespawn.instance.forceRespawnPlayers.add(player.getName());
-        } else {
-            ForceRespawn.instance.forceRespawnPlayers.remove(player.getName());
-        }
-    }
-
-    public static boolean getPlayerForceRespawn(Player player) {
-        Validate.notNull(player, "player can not be null");
-        threadCheck();
-        return ForceRespawn.instance.forceRespawnPlayers.contains(player.getName());
     }
 
     public void onEnable() {
@@ -56,7 +39,9 @@ public class ForceRespawn extends JavaPlugin {
                 nms = (NMS) clazz.newInstance();
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            getLogger().severe("Could not find support for version: " + version);
+            getLogger().severe("Check for an update here: " + "http://dev.bukkit.org/bukkit-plugins/force-respawn/");
+            getLogger().severe("If there is no update, bug psycowithespn");
             this.setEnabled(false);
             return;
         }
@@ -77,11 +62,6 @@ public class ForceRespawn extends JavaPlugin {
     private void registerListeners() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerDeathListener(this), this);
-        pm.registerEvents(new QuitListener(this), this);
-    }
-
-    private void playerLogout(Player player) {
-        forceRespawnPlayers.remove(player.getName());
     }
 
     private static void threadCheck() {
@@ -90,20 +70,6 @@ public class ForceRespawn extends JavaPlugin {
         }
         if (!Thread.currentThread().equals(thread)) {
             throw new ForceRespawnException("Api call from a different thread! Expected: " + thread.getName() + ", Recieved: " + Thread.currentThread().getName());
-        }
-    }
-
-    private class QuitListener implements Listener {
-
-        private ForceRespawn plugin;
-
-        private QuitListener(ForceRespawn plugin) {
-            this.plugin = plugin;
-        }
-
-        @EventHandler
-        public void onPlayerQuit(PlayerQuitEvent event) {
-            plugin.playerLogout(event.getPlayer());
         }
     }
 }

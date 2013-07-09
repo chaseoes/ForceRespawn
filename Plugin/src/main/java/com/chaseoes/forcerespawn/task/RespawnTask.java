@@ -18,7 +18,7 @@ public class RespawnTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        ForceRespawnEvent fre = new ForceRespawnEvent(player, plugin.getPlayerForceRespawn(player));
+        ForceRespawnEvent fre = new ForceRespawnEvent(player, false);
         Bukkit.getPluginManager().callEvent(fre);
         if (fre.isForcedRespawn() && player.isOnline()) {
             plugin.sendRespawnPacket(player);
