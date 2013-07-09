@@ -5,4 +5,5 @@ import org.bukkit.entity.Player;
 public interface NMS {
 
     public void sendRespawnPacket(Player player);
+
 }
