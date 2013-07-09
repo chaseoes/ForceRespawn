@@ -1,0 +1,4 @@
+name: ForceRespawn
+main: com.chaseoes.forcerespawn.ForceRespawn
+version: 1.0
+description: Exposes an API to allow plugins to force people to respawn.
