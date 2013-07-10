@@ -32,7 +32,7 @@ public class ForceRespawn extends JavaPlugin {
         ForceRespawn.thread = Thread.currentThread();
         String version = getPackageVersion();
         if (version.equals("craftbukkit"))
-            version = "pre";
+            version = "vPre";
         try {
             Class<?> clazz = Class.forName("com.chaseoes.forcerespawn.nms." + version + ".NMSHandler");
             if (NMS.class.isAssignableFrom(clazz)) {
