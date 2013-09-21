@@ -11,7 +11,7 @@
     <url>http://chaseoes.com/</url>
 
     <properties>
-        <plugin.version>1.1</plugin.version>
+        <plugin.version>1.2</plugin.version>
     </properties>
 
     <modules>
@@ -25,6 +25,7 @@
         <module>v1_5_R3</module>
         <module>v1_6_R1</module>
         <module>v1_6_R2</module>
+        <module>v1_6_R3</module>
         <module>Plugin</module>
     </modules>
 

@@ -8,7 +8,7 @@ public class ForceRespawnEvent extends PlayerEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private boolean forcedRespawn = false;
+    private boolean forcedRespawn;
 
     public ForceRespawnEvent(Player who, boolean forced) {
         super(who);
